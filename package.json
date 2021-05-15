@@ -1,5 +1,5 @@
 {
-  "name": "hello_world",
+  "name": "auto_webview",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "fastclick": "^1.0.6",
+    "muse-ui": "^3.0.2",
     "vue": "^2.6.11"
   },
   "devDependencies": {
