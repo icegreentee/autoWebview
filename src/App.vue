@@ -1,103 +1,70 @@
 <template>
   <div id="app">
-    <mu-form
-      :model="form"
-      class="mu-demo-form"
-      :label-position="labelPosition"
-      label-width="100"
-    >
-      <mu-form-item prop="input" label="Input">
-        <mu-text-field v-model="form.input"></mu-text-field>
-      </mu-form-item>
-      <mu-form-item prop="select" label="Select">
-        <mu-select v-model="form.select">
-          <mu-option
-            v-for="option in options"
-            :key="option"
-            :label="option"
-            :value="option"
-          ></mu-option>
-        </mu-select>
-      </mu-form-item>
-      <mu-form-item prop="date" label="Date Time">
-        <mu-date-input
-          v-model="form.date"
-          type="dateTime"
-          actions
-        ></mu-date-input>
-      </mu-form-item>
-      <mu-form-item prop="radio" label="Radio">
-        <mu-radio v-model="form.radio" value="male" label="Male"></mu-radio>
-        <mu-radio v-model="form.radio" value="female" label="Female"></mu-radio>
-      </mu-form-item>
-      <mu-form-item prop="checkbox" label="Checkbox">
-        <mu-checkbox
-          v-model="form.checkbox"
-          value="eat"
-          label="Eat"
-        ></mu-checkbox>
-        <mu-checkbox
-          v-model="form.checkbox"
-          value="sleep"
-          label="Sleep"
-        ></mu-checkbox>
-        <mu-checkbox
-          v-model="form.checkbox"
-          value="run"
-          label="Run"
-        ></mu-checkbox>
-        <mu-checkbox
-          v-model="form.checkbox"
-          value="movie"
-          label="Movie"
-        ></mu-checkbox>
-      </mu-form-item>
-      <mu-form-item prop="switch" label="Switch">
-        <mu-switch v-model="form.switch"></mu-switch>
-      </mu-form-item>
-      <mu-form-item prop="slider" label="Slider">
-        <mu-slider v-model="form.slider"></mu-slider>
-      </mu-form-item>
-      <mu-form-item prop="textarea" label="Textarea">
-        <mu-text-field
-          multi-line
-          :rows="3"
-          :rows-max="6"
-          v-model="form.textarea"
-        ></mu-text-field>
-      </mu-form-item>
-    </mu-form>
+    <mu-appbar style="width: 100%; position: fixed" color="primary">
+      <mu-button icon slot="left" @click="open = true">
+        <mu-icon value="menu"></mu-icon>
+      </mu-button>
+      autoTools
+      <mu-button icon slot="right"
+        ><mu-icon value="refresh"></mu-icon
+      ></mu-button>
+    </mu-appbar>
+    <mu-drawer :open.sync="open" :docked="false" :right="position === 'right'">
+      <mu-list>
+        <mu-list-item button>
+          <mu-list-item-title>首页</mu-list-item-title>
+        </mu-list-item>
+        <mu-list-item button>
+          <mu-list-item-title>魔纪wiki</mu-list-item-title>
+        </mu-list-item>
+        <mu-list-item button>
+          <mu-list-item-title>模拟抽卡</mu-list-item-title>
+        </mu-list-item>
+        <mu-list-item>
+          <mu-text-field v-model="value1">
+            <mu-button color="primary">跳转链接</mu-button>
+          </mu-text-field>
+        </mu-list-item>
+        <mu-list-item @click="open = false" button>
+          <mu-list-item-title>返回</mu-list-item-title>
+        </mu-list-item>
+      </mu-list>
+    </mu-drawer>
+    <!-- <iframe
+      src="https://www.baidu.com/"
+      width="100%"
+      height="800"
+      frameborder="0"
+      scrolling="auto"
+    ></iframe> -->
   </div>
 </template>
 
 <script>
+import scripts from "./Scripts/index";
 export default {
   data() {
-    return {
-      options: [
-        "Option 1",
-        "Option 2",
-        "Option 3",
-        "Option 4",
-        "Option 5",
-        "Option 6",
-        "Option 7",
-        "Option 8",
-        "Option 9",
-        "Option 10",
-      ],
-      labelPosition: "top",
-      form: {
-        input: "",
-        select: "",
-        date: "",
-        radio: "",
-        checkbox: [],
-        switch: false,
-        slider: 30,
-        textarea: "",
-      },
-    };
+    return { checkbox: true, open: false };
+  },
+  methods: {
+    test() {
+      // this.callAJ("fun", function () {
+      //   log(55);
+      // });
+      this.callAJ("onFloat", scripts);
+    },
+    callAJ(functionName, arrParam) {
+      let res = undefined;
+      try {
+        res = prompt(functionName, arrParam);
+      } catch (error) {
+        layToast(error);
+      }
+      return res;
+    },
+  },
+  created() {
+    // console.log(scripts);
   },
 };
 </script>
