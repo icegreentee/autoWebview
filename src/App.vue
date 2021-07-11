@@ -1,57 +1,61 @@
 <template>
   <div id="app">
-    <mu-appbar style="width: 100%; position: fixed" color="primary">
-      <mu-button icon slot="left" @click="open = true">
-        <mu-icon value="menu"></mu-icon>
-      </mu-button>
-      autoTools
-      <mu-button icon slot="right"
-        ><mu-icon value="refresh"></mu-icon
-      ></mu-button>
-    </mu-appbar>
-    <mu-drawer :open.sync="open" :docked="false" :right="position === 'right'">
-      <mu-list>
-        <mu-list-item button>
-          <mu-list-item-title>首页</mu-list-item-title>
-        </mu-list-item>
-        <mu-list-item button>
-          <mu-list-item-title>魔纪wiki</mu-list-item-title>
-        </mu-list-item>
-        <mu-list-item button>
-          <mu-list-item-title>模拟抽卡</mu-list-item-title>
-        </mu-list-item>
-        <mu-list-item>
-          <mu-text-field v-model="value1">
-            <mu-button color="primary">跳转链接</mu-button>
-          </mu-text-field>
-        </mu-list-item>
-        <mu-list-item @click="open = false" button>
-          <mu-list-item-title>返回</mu-list-item-title>
-        </mu-list-item>
-      </mu-list>
-    </mu-drawer>
-    <!-- <iframe
-      src="https://www.baidu.com/"
-      width="100%"
-      height="800"
-      frameborder="0"
-      scrolling="auto"
-    ></iframe> -->
+    <mu-flex direction="column" style="height: 100%">
+      <headerSide
+        @changeIframe="changeIframe"
+        @changeIframeNet="changeIframeNet"
+      ></headerSide>
+      <iframe
+        v-if="iframeOpen"
+        :src="iframeNet"
+        width="100%"
+        height="100%"
+        frameborder="0"
+        scrolling="auto"
+      ></iframe>
+      <mu-flex direction="column" style="height: 100%; width: 100%">
+        <mu-flex
+          class="settingContent"
+          justify-content="between"
+          align-items="center"
+        >
+          <div class="setting-font">无障碍服务</div>
+          <mu-switch v-model="isopenWu"></mu-switch>
+        </mu-flex>
+        <mu-flex
+          class="settingContent"
+          justify-content="between"
+          align-items="center"
+        >
+          <div class="setting-font">悬浮窗</div>
+          <mu-switch v-model="isopenWu"></mu-switch>
+        </mu-flex>
+        <mu-divider style="margin-top: 10px"></mu-divider>
+      </mu-flex>
+    </mu-flex>
   </div>
 </template>
 
 <script>
 import scripts from "./Scripts/index";
+import headerSide from "./Components/headerAndSide.vue";
 export default {
+  components: {
+    headerSide,
+  },
   data() {
-    return { checkbox: true, open: false };
+    return {
+      iframeOpen: false,
+      iframeNet: "",
+      isopenWu: false,
+    };
   },
   methods: {
-    test() {
-      // this.callAJ("fun", function () {
-      //   log(55);
-      // });
-      this.callAJ("onFloat", scripts);
+    changeIframe(isIframe) {
+      this.iframeOpen = isIframe;
+    },
+    changeIframeNet(net) {
+      this.iframeNet = net;
     },
     callAJ(functionName, arrParam) {
       let res = undefined;
@@ -64,12 +68,20 @@ export default {
     },
   },
   created() {
-    // console.log(scripts);
+    // this.callAJ("onFloat", scripts);
   },
 };
 </script>
 <style>
-.mu-demo-form {
+#app {
+  height: 100vh;
+}
+.settingContent {
   width: 100%;
+  padding: 10px 15px 0 15px;
+}
+.setting-font {
+  /* font-size: 14px;*/
+  font-weight: 600;
 }
 </style>
