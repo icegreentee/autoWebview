@@ -13,7 +13,9 @@
           <mu-avatar :size="56">
             <img src="../img/1.png" />
           </mu-avatar>
-          <div style="margin-top:5px;font-weight:600;">周回auto机器人全自动小伊v8</div>
+          <div style="margin-top: 5px; font-weight: 600">
+            周回auto机器人全自动小伊v8
+          </div>
         </div>
         <mu-divider></mu-divider>
         <mu-list-item button @click="backHome">
@@ -31,7 +33,10 @@
         <mu-list-item button @click="goPage('https://baidu.com')">
           <mu-list-item-title>切换源</mu-list-item-title>
         </mu-list-item>
-         <mu-list-item button @click="goPage('https://baidu.com')">
+        <mu-list-item button @click="goPage('https://baidu.com')">
+          <mu-list-item-title>检查更新</mu-list-item-title>
+        </mu-list-item>
+        <mu-list-item button @click="goPage('https://baidu.com')">
           <mu-list-item-title>关于</mu-list-item-title>
         </mu-list-item>
         <mu-list-item @click="open = false" button>

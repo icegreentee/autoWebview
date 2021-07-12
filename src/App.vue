@@ -13,41 +13,25 @@
         frameborder="0"
         scrolling="auto"
       ></iframe>
-      <mu-flex direction="column" style="height: 100%; width: 100%">
-        <mu-flex
-          class="settingContent"
-          justify-content="between"
-          align-items="center"
-        >
-          <div class="setting-font">无障碍服务</div>
-          <mu-switch v-model="isopenWu"></mu-switch>
-        </mu-flex>
-        <mu-flex
-          class="settingContent"
-          justify-content="between"
-          align-items="center"
-        >
-          <div class="setting-font">悬浮窗</div>
-          <mu-switch v-model="isopenWu"></mu-switch>
-        </mu-flex>
-        <mu-divider style="margin-top: 10px"></mu-divider>
-      </mu-flex>
+      <div style="height: 100%; width: 100%" v-else>
+        <scriptSetting></scriptSetting>
+      </div>
     </mu-flex>
   </div>
 </template>
 
 <script>
-import scripts from "./Scripts/index";
 import headerSide from "./Components/headerAndSide.vue";
+import scriptSetting from "./Components/scriptSetting.vue";
 export default {
   components: {
     headerSide,
+    scriptSetting,
   },
   data() {
     return {
       iframeOpen: false,
       iframeNet: "",
-      isopenWu: false,
     };
   },
   methods: {
@@ -75,13 +59,5 @@ export default {
 <style>
 #app {
   height: 100vh;
-}
-.settingContent {
-  width: 100%;
-  padding: 10px 15px 0 15px;
-}
-.setting-font {
-  /* font-size: 14px;*/
-  font-weight: 600;
 }
 </style>
