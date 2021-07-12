@@ -27,7 +27,7 @@
         >
           <mu-list-item-title>魔纪wiki</mu-list-item-title>
         </mu-list-item>
-        <mu-list-item button @click="goPage('https://baidu.com')">
+        <mu-list-item button @click="goPage('http://rika.ren/~kuro/workspace/playground/')">
           <mu-list-item-title>模拟抽卡</mu-list-item-title>
         </mu-list-item>
         <mu-list-item button @click="goPage('https://baidu.com')">
