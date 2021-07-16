@@ -36,9 +36,12 @@
         <mu-list-item button @click="goPage('https://baidu.com')">
           <mu-list-item-title>检查更新</mu-list-item-title>
         </mu-list-item>
-        <mu-list-item button @click="goPage('https://baidu.com')">
-          <mu-list-item-title>关于</mu-list-item-title>
+        <mu-list-item button @click="openconsole">
+          <mu-list-item-title>日志</mu-list-item-title>
         </mu-list-item>
+        <!-- <mu-list-item button @click="goPage('https://baidu.com')">
+          <mu-list-item-title>关于</mu-list-item-title>
+        </mu-list-item> -->
         <mu-list-item @click="open = false" button>
           <mu-list-item-title>返回</mu-list-item-title>
         </mu-list-item>
@@ -64,6 +67,18 @@ export default {
       this.$emit("changeIframe", true);
       this.$emit("changeIframeNet", net);
     },
+    callAJ(functionName, arrParam) {
+      let res = undefined;
+      try {
+        res = prompt(functionName, arrParam);
+      } catch (error) {
+        console.log(error);
+      }
+      return res;
+    },
+    openconsole(){
+      this.callAJ("open_console")
+    }
   },
 };
 </script>

@@ -1,7 +1,7 @@
-export default function algo_init() {
-    function taskDefault() {
+export default function() {
+    function init() {
         log("233")
     }
 
-    taskDefault()
+    init()
 }
