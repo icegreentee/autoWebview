@@ -1,6 +1,7 @@
-export default function() {
+export default function(config) {
     function init() {
-        log("233")
+        log("test")
+        log(config)
     }
 
     init()

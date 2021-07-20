@@ -191,7 +191,6 @@ export default {
           localStorage.setItem(one_config, this.config[one_config]);
         }
       }
-
       // 改变设置
       let data = { config: this.config };
       this.callAJ("change_config", JSON.stringify(data));
@@ -199,10 +198,10 @@ export default {
   },
   created() {
     //initServe
-    // let res = this.callAJ("is_serve");
-    // if (res) {
-    //   this.serve = true;
-    // }
+    let res = this.callAJ("is_serve");
+    if (res) {
+      this.serve = true;
+    }
     //config
     let one = {};
     for (let i = 0; i < this.options.length; i++) {
@@ -234,15 +233,15 @@ export default {
     one["selectOptions"] = this.config.selectOptions;
     this.config = one;
     //script
-    // let options = [];
-    // for (let i = 0; i < this.options.length; i++) {
-    //   let option = {};
-    //   option["name"] = this.options[i].name;
-    //   option["script"] = this.options[i].script;
-    //   options.push(option);
-    // }
-    // let data = { scripts: options, config: this.config };
-    // this.callAJ("set_script", JSON.stringify(data));
+    let options = [];
+    for (let i = 0; i < this.options.length; i++) {
+      let option = {};
+      option["name"] = this.options[i].name;
+      option["script"] = this.options[i].script;
+      options.push(option);
+    }
+    let data = { scripts: options, config: this.config };
+    this.callAJ("set_script", JSON.stringify(data));
   },
 };
 </script>
