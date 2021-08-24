@@ -4,7 +4,7 @@
       <mu-button icon slot="left" @click="open = true">
         <mu-icon value="menu"></mu-icon>
       </mu-button>
-      autoTools
+      autoTools-beta
     </mu-appbar>
 
     <mu-drawer :open.sync="open" :docked="false">
