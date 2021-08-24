@@ -27,10 +27,13 @@
         >
           <mu-list-item-title>魔纪wiki</mu-list-item-title>
         </mu-list-item>
-        <mu-list-item button @click="goPage('http://rika.ren/~kuro/workspace/playground/')">
+        <mu-list-item
+          button
+          @click="goPage('http://rika.ren/~kuro/workspace/playground/')"
+        >
           <mu-list-item-title>模拟抽卡</mu-list-item-title>
         </mu-list-item>
-        <mu-list-item button @click="goPage('https://baidu.com')">
+        <mu-list-item button @click="openSimple = true">
           <mu-list-item-title>切换源</mu-list-item-title>
         </mu-list-item>
         <mu-list-item button @click="goPage('https://baidu.com')">
@@ -39,14 +42,18 @@
         <mu-list-item button @click="openconsole">
           <mu-list-item-title>日志</mu-list-item-title>
         </mu-list-item>
-        <!-- <mu-list-item button @click="goPage('https://baidu.com')">
-          <mu-list-item-title>关于</mu-list-item-title>
-        </mu-list-item> -->
         <mu-list-item @click="open = false" button>
           <mu-list-item-title>返回</mu-list-item-title>
         </mu-list-item>
       </mu-list>
     </mu-drawer>
+
+    <mu-dialog title="输入网址" width="360" :open.sync="openSimple">
+      <mu-flex>
+        <mu-text-field v-model="netinput"></mu-text-field>
+        <mu-button color="primary" @click="changeSource">切换源</mu-button>
+      </mu-flex>
+    </mu-dialog>
   </div>
 </template>
 
@@ -55,7 +62,17 @@ export default {
   data() {
     return {
       open: false,
+      openSimple: false,
+      netinput: "",
     };
+  },
+  created() {
+    let save_data = localStorage.getItem("change_source");
+    if (save_data) {
+      this.netinput = save_data;
+    } else {
+      localStorage.setItem("change_source", this.netinput);
+    }
   },
   methods: {
     backHome() {
@@ -76,9 +93,13 @@ export default {
       }
       return res;
     },
-    openconsole(){
-      this.callAJ("open_console")
-    }
+    openconsole() {
+      this.callAJ("open_console");
+    },
+    changeSource() {
+      this.callAJ("change_source", this.netinput);
+      localStorage.setItem("change_source", this.netinput);
+    },
   },
 };
 </script>
